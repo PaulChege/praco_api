@@ -34,6 +34,7 @@ public class UserService {
         confirmUser(userId);
          Optional<User> user = userRepository.findById(userId);
          if (user.isPresent()){
+             user.get().setStarCount(userRepository.getStarCount(userId));
              return user.get();
          }else{
              throw new IllegalStateException("User not found");

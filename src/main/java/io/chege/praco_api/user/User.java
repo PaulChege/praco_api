@@ -36,6 +36,10 @@ public class User {
     @OneToMany(mappedBy="user")
     private Set<PracticeLog> practiceLogs;
 
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Integer starCount;
+
     public User(String first_name, String last_name, String email, String password, Boolean status) {
         this.firstName = first_name;
         this.lastName = last_name;
@@ -118,5 +122,13 @@ public class User {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    public Integer getStarCount() {
+        return starCount;
+    }
+
+    public void setStarCount(Integer starCount) {
+        this.starCount = starCount;
     }
 }
