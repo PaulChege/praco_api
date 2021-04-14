@@ -30,7 +30,7 @@ public class UserController {
         try {
             User createdUser = userService.createUser(user);
             if (createdUser == null) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.badRequest().build();
             } else {
                 return ResponseEntity.accepted().body(createdUser);
             }

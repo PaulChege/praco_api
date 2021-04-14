@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class UserConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(UserRepository userRepository) {
+    CommandLineRunner userSetup(UserRepository userRepository) {
         return args -> {
             if (userRepository.getUserByEmail("janedoe@gmail.com").isEmpty()) {
                 userRepository.save(new User("Jane", "Doe", "janedoe@gmail.com", "password", true));
