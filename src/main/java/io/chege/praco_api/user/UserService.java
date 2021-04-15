@@ -34,7 +34,20 @@ public class UserService {
         confirmUser(userId);
          Optional<User> user = userRepository.findById(userId);
          if (user.isPresent()){
-             user.get().setStarCount(userRepository.getStarCount(userId));
+             Integer weeklyAvg = userRepository.getPracticeAvg(userId);
+             int starCount = 0;
+             if(weeklyAvg < 1){
+                 starCount = 1;
+             }else if (weeklyAvg < 7){
+                 starCount = 2;
+             }else if (weeklyAvg < 14){
+                 starCount = 3;
+             }else if (weeklyAvg < 21){
+                 starCount = 4;
+             }else {
+                 starCount = 5;
+             }
+             user.get().setStarCount(starCount);
              return user.get();
          }else{
              throw new IllegalStateException("User not found");
